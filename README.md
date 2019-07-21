@@ -6,12 +6,12 @@ In this repository I have many simple projects written in languages, libraries a
 
 | Language, library, tool, concept                                      | Examples of work within repo |
 | --------------------------------------------------------------------- | ---------------------------- |
-| API (application programming interface)                               | tbd                          |
 | CSS3                                                                  | tbd                          |
 | CSS libraries, e.g. Bootstrap, Foundation etc                         | tbd                          |
+| External API (application programming interface)                      | tbd                          |
 | HTML5                                                                 | tbd                          |
 | JavaScript ('vanilla', 'ES5', 'ES6', 'ES7', 'ES8', 'ES9'...) (**\***) | tbd                          |
-| Jest (unit testing) (**\***)                                          | tbd                          |
+| Jest (unit testing) (**\***)                                          | [\_tests](_tests)            |
 | jQuery                                                                | tbd                          |
 | JSON                                                                  | tbd                          |
 | MySQL                                                                 | tbd                          |
@@ -23,7 +23,7 @@ In this repository I have many simple projects written in languages, libraries a
 | TypeScript (**\***)                                                   | tbd                          |
 | Vue (**\***)                                                          | tbd                          |
 
-(**\***) Examples of these within larger projects are available in separate repositories:
+(**\***) Examples of these within larger projects are also available in separate repositories:
 
 - https://github.com/tedjenkins/forum
 - https://github.com/tedjenkins/vue-clicker
