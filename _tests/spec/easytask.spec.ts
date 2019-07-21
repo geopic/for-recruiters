@@ -1,4 +1,9 @@
-import { values, submitTask, clearAllTasks, init } from '../easytask/script.js';
+import {
+  values,
+  submitTask,
+  clearAllTasks,
+  init
+} from '../../easytask/script.js';
 
 describe('init', () => {
   beforeEach(() => {
