@@ -5,13 +5,13 @@ import {
   init
 } from '../../easytask/script.js';
 
-describe('init', () => {
-  beforeEach(() => {
-    document.body.innerHTML =
-      '<form><input type="text" id="task-title" name="task-title" required /> <textarea id="task-description" name="task-description"></textarea></form> <div id="tasklist"></div> <button type="button" id="clear-all-tasks"></button>';
-    localStorage.clear();
-  });
+beforeEach(() => {
+  document.body.innerHTML =
+    '<form><input type="text" id="task-title" name="task-title" required /> <textarea id="task-description" name="task-description"></textarea></form> <div id="tasklist"><div id="no-tasks">There are no tasks to display...</div></div> <button type="button" id="clear-all-tasks"></button>';
+  localStorage.clear();
+});
 
+describe('init', () => {
   describe('data exists', () => {
     test('task with title and description', () => {
       localStorage.setItem(
@@ -50,18 +50,15 @@ describe('init', () => {
     test('appropriate message is shown', () => {
       init();
       expect(document.body.textContent).toMatch('no tasks');
-      expect(document.querySelector('.no-tasks')).toBeDefined();
+      expect(document.getElementById('no-tasks')!.style.display).not.toBe(
+        'none'
+      );
     });
   });
 });
 
 describe('submitTask', () => {
-  beforeEach(() => {
-    document.body.innerHTML =
-      '<input type="text" id="task-title" name="task-title" required /> <textarea id="task-description" name="task-description">';
-    localStorage.clear();
-  });
-
+  // mock Event.preventDefault()
   const mockEv = {
     preventDefault: () => true
   };
@@ -73,7 +70,22 @@ describe('submitTask', () => {
     expect(localStorage.getItem(values.locStorageKey)).toBeDefined();
   });
 
-  test('no save to LS if title is not supplied', () => {
+  test('the new task is added to the DOM', () => {
+    (document.getElementById('task-title') as HTMLInputElement).value = 'foo';
+    submitTask(mockEv);
+
+    expect(document.querySelectorAll('.task').length).toBe(1);
+
+    (document.getElementById('task-title') as HTMLInputElement).value = 'bar';
+    submitTask(mockEv);
+
+    expect(document.querySelectorAll('.task').length).toBe(2);
+
+    // Ensure 'no tasks' message is not displayed
+    expect(document.getElementById('no-tasks')!.style.display).toBe('none');
+  });
+
+  test('no save if title is not supplied', () => {
     submitTask(mockEv);
 
     expect(localStorage.getItem(values.locStorageKey)).toBeNull();
@@ -81,16 +93,28 @@ describe('submitTask', () => {
 });
 
 describe('clearAllTasks', () => {
-  test('clears data from localStorage', () => {
-    window.confirm = (str: string) => true;
-
+  beforeEach(() => {
     localStorage.setItem(
       values.locStorageKey,
       JSON.stringify([{ title: 'foo', desc: 'bar' }])
     );
+  });
 
+  window.confirm = (str: string) => true;
+
+  test('clears data from localStorage', () => {
     clearAllTasks();
 
     expect(localStorage.getItem(values.locStorageKey)).toBeNull();
+  });
+
+  test('updates the DOM', () => {
+    init();
+    expect(document.body.textContent).toMatch(/foo|bar/);
+
+    clearAllTasks();
+
+    expect(document.querySelectorAll('.task').length).toBe(0);
+    expect(document.getElementById('no-tasks')!.style.display).toBe('block');
   });
 });
