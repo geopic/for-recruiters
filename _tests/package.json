@@ -2,7 +2,8 @@
   "name": "tests",
   "description": "Tests for my portfolio, run with Jest",
   "scripts": {
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "test:watch": "jest --env=jsdom --watchAll"
   },
   "license": "Unlicense",
   "devDependencies": {
