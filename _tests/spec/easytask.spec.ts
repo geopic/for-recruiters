@@ -16,7 +16,7 @@ beforeEach(() => {
 
 describe('init', () => {
   describe('data exists', () => {
-    test('task with title and description', () => {
+    test('displays task correctly with title and description', () => {
       localStorage.setItem(
         values.locStorageKey,
         JSON.stringify([{ title: 'foo', desc: 'bar' }])
@@ -31,7 +31,7 @@ describe('init', () => {
       expect(document.querySelector('.task-desc')).toBeDefined();
     });
 
-    test('task with title and no description', () => {
+    test('displays task correctly with title and no description', () => {
       localStorage.setItem(
         values.locStorageKey,
         JSON.stringify([
@@ -50,7 +50,7 @@ describe('init', () => {
   });
 
   describe('data does not exist', () => {
-    test('appropriate message is shown', () => {
+    test('shows the appropriate message', () => {
       init();
       expect(document.body.textContent).toMatch('no tasks');
       expect(document.getElementById('no-tasks')!.style.display).not.toBe(
@@ -63,14 +63,14 @@ describe('init', () => {
 describe('submitTask', () => {
   const mockEv = new Event('submit');
 
-  test('inputs are saved to LS', () => {
+  test('saves inputs to LS', () => {
     (document.getElementById('task-title') as HTMLInputElement).value = 'foo';
     submitTask(mockEv);
 
     expect(localStorage.getItem(values.locStorageKey)).toBeDefined();
   });
 
-  test('the new task is added to the DOM', () => {
+  test('adds new task to the DOM', () => {
     (document.getElementById('task-title') as HTMLInputElement).value = 'foo';
     submitTask(mockEv);
 
@@ -85,7 +85,7 @@ describe('submitTask', () => {
     expect(document.getElementById('no-tasks')!.style.display).toBe('none');
   });
 
-  test('no save if title is not supplied', () => {
+  test("doesn't save if title is not supplied", () => {
     submitTask(mockEv);
 
     expect(localStorage.getItem(values.locStorageKey)).toBeNull();
@@ -99,7 +99,7 @@ describe('deleteTask', () => {});
 describe('toggleTaskTitleDesc', () => {
   const mockEv = new Event('mouseenter');
 
-  test('Toggles between title and description', () => {
+  test('toggles between title and description', () => {
     document.body.innerHTML =
       '<div class="task"><div class="task-title">Title</div> <div class="task-desc" style="visibility: hidden">Description</div></div>';
     const taskEl = document.querySelector('.task') as HTMLElement;
