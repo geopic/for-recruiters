@@ -25,6 +25,13 @@ const mixinAddTaskToDOM = task => {
     const taskDescEl = document.createElement('div');
     taskDescEl.classList.add('task-desc');
     taskDescEl.textContent = task.desc;
+
+    // Hide desc until user hovers over task
+    taskDescEl.style.visibility = 'hidden';
+
+    // Add something small to signal that the task has a description
+    taskTitleEl.textContent += ' ↩️';
+
     taskEl.appendChild(taskDescEl);
   }
 
@@ -38,6 +45,7 @@ const mixinAddTaskToDOM = task => {
   amendTaskBtn.type = 'button';
   amendTaskBtn.classList.add('task-amend-btn');
   amendTaskBtn.textContent = 'Amend';
+  amendTaskBtn.addEventListener('click', amendTask);
   taskBtns.appendChild(amendTaskBtn);
 
   // 'Delete task' button
@@ -45,7 +53,14 @@ const mixinAddTaskToDOM = task => {
   deleteTaskBtn.type = 'button';
   deleteTaskBtn.classList.add('task-delete-btn');
   deleteTaskBtn.textContent = 'Delete';
+  deleteTaskBtn.addEventListener('click', deleteTask);
   taskBtns.appendChild(deleteTaskBtn);
+
+  // Handle mouse and hover events on element
+  taskEl.addEventListener('mouseenter', toggleTaskTitleDesc);
+  taskEl.addEventListener('mouseleave', toggleTaskTitleDesc);
+  taskEl.addEventListener('touchstart', toggleTaskTitleDesc);
+  // taskEl.addEventListener('touchend', toggleTaskTitleDesc); // Left in for now just in case touchend would feel nice on mobile
 
   document.getElementById('tasklist').appendChild(taskEl);
 };
@@ -89,6 +104,24 @@ export const submitTask = e => {
   titleInput.focus();
 };
 
+export const amendTask = () => {};
+
+export const deleteTask = () => {};
+
+export const toggleTaskTitleDesc = e => {
+  if (e.target.className !== 'task' || !e.target.querySelector('.task-desc')) {
+    return;
+  }
+  e.target.querySelector('.task-title').style.visibility =
+    e.target.querySelector('.task-title').style.visibility === 'hidden'
+      ? 'visible'
+      : 'hidden';
+  e.target.querySelector('.task-desc').style.visibility =
+    e.target.querySelector('.task-desc').style.visibility === 'hidden'
+      ? 'visible'
+      : 'hidden';
+};
+
 // 'Clear all tasks' function
 export const clearAllTasks = () => {
   if (window.confirm('Remove all tasks? This action cannot be undone.')) {
@@ -120,8 +153,9 @@ export const init = () => {
   // Focus on 'title' input
   document.getElementById('task-title').focus();
 
-  // Add handlers to events
+  // Apply handlers to events not yet handled
   document.querySelector('form').addEventListener('submit', submitTask);
+
   document
     .getElementById('clear-all-tasks')
     .addEventListener('click', clearAllTasks);
