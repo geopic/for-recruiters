@@ -1,6 +1,9 @@
 import {
   values,
   submitTask,
+  amendTask,
+  deleteTask,
+  toggleTaskTitleDesc,
   clearAllTasks,
   init
 } from '../../easytask/script.js';
@@ -58,10 +61,7 @@ describe('init', () => {
 });
 
 describe('submitTask', () => {
-  // mock Event.preventDefault()
-  const mockEv = {
-    preventDefault: () => true
-  };
+  const mockEv = new Event('submit');
 
   test('inputs are saved to LS', () => {
     (document.getElementById('task-title') as HTMLInputElement).value = 'foo';
@@ -89,6 +89,32 @@ describe('submitTask', () => {
     submitTask(mockEv);
 
     expect(localStorage.getItem(values.locStorageKey)).toBeNull();
+  });
+});
+
+describe('amendTask', () => {});
+
+describe('deleteTask', () => {});
+
+describe('toggleTaskTitleDesc', () => {
+  const mockEv = new Event('mouseenter');
+
+  test('Toggles between title and description', () => {
+    document.body.innerHTML =
+      '<div class="task"><div class="task-title">Title</div> <div class="task-desc" style="visibility: hidden">Description</div></div>';
+    const taskEl = document.querySelector('.task') as HTMLElement;
+    const titleEl = document.querySelector('.task-title') as HTMLElement;
+    const descEl = document.querySelector('.task-desc') as HTMLElement;
+
+    toggleTaskTitleDesc(mockEv, taskEl);
+
+    expect(titleEl.style.visibility).toBe('hidden');
+    expect(descEl.style.visibility).toBe('visible');
+
+    toggleTaskTitleDesc(mockEv, taskEl);
+
+    expect(titleEl.style.visibility).toBe('visible');
+    expect(descEl.style.visibility).toBe('hidden');
   });
 });
 

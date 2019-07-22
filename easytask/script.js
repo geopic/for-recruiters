@@ -6,11 +6,10 @@ export const values = {
   }
 };
 
-// Site mixins
 /**
- * mixinAddTaskToDOM
- * Takes in task object and displays it on the page.
+ * @description Takes in task object and displays it on the page.
  * @param {object} task Task object (title: string, desc: string).
+ * @mixin
  */
 const mixinAddTaskToDOM = task => {
   const taskEl = document.createElement('div');
@@ -60,12 +59,14 @@ const mixinAddTaskToDOM = task => {
   taskEl.addEventListener('mouseenter', toggleTaskTitleDesc);
   taskEl.addEventListener('mouseleave', toggleTaskTitleDesc);
   taskEl.addEventListener('touchstart', toggleTaskTitleDesc);
-  // taskEl.addEventListener('touchend', toggleTaskTitleDesc); // Left in for now just in case touchend would feel nice on mobile
 
   document.getElementById('tasklist').appendChild(taskEl);
 };
 
-// Task submit function -- runs on submit event via form
+/**
+ * @description Task submit function.
+ * @param {Event} e submit event via form.
+ */
 export const submitTask = e => {
   e.preventDefault();
 
@@ -108,21 +109,28 @@ export const amendTask = () => {};
 
 export const deleteTask = () => {};
 
-export const toggleTaskTitleDesc = e => {
-  if (e.target.className !== 'task' || !e.target.querySelector('.task-desc')) {
+/**
+ * @description Handler which runs on mouseenter and mouseleave events on each task element.
+ * @param {Event} e Mouseenter, mouseleave event
+ * @param {EventTarget} targ For unit tests only
+ */
+export const toggleTaskTitleDesc = (e, targ = e.target) => {
+  if (targ.className !== 'task' || !targ.querySelector('.task-desc')) {
     return;
   }
-  e.target.querySelector('.task-title').style.visibility =
-    e.target.querySelector('.task-title').style.visibility === 'hidden'
+  targ.querySelector('.task-title').style.visibility =
+    targ.querySelector('.task-title').style.visibility === 'hidden'
       ? 'visible'
       : 'hidden';
-  e.target.querySelector('.task-desc').style.visibility =
-    e.target.querySelector('.task-desc').style.visibility === 'hidden'
+  targ.querySelector('.task-desc').style.visibility =
+    targ.querySelector('.task-desc').style.visibility === 'hidden'
       ? 'visible'
       : 'hidden';
 };
 
-// 'Clear all tasks' function
+/**
+ * @description Clears all tasks from localStorage.
+ */
 export const clearAllTasks = () => {
   if (window.confirm('Remove all tasks? This action cannot be undone.')) {
     localStorage.removeItem(values.locStorageKey);
@@ -133,7 +141,9 @@ export const clearAllTasks = () => {
   }
 };
 
-// 'Init' function -- runs on first load of page
+/**
+ * @description Initialising function (runs on first load of page).
+ */
 export const init = () => {
   // 'No tasks to display' message
   const noTasksEl = document.createElement('div');
