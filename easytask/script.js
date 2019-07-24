@@ -15,6 +15,11 @@ const mixinAddTaskToDOM = task => {
   const taskEl = document.createElement('div');
   taskEl.classList.add('task');
 
+  // 'Bar' element on side of task, coloured if task has a description
+  const taskBar = document.createElement('div');
+  taskBar.classList.add('task-bar');
+  taskEl.appendChild(taskBar);
+
   const taskTitleEl = document.createElement('h2');
   taskTitleEl.classList.add('task-title');
   taskTitleEl.textContent = task.title;
@@ -26,10 +31,10 @@ const mixinAddTaskToDOM = task => {
     taskDescEl.textContent = task.desc;
 
     // Hide desc until user hovers over task
-    taskDescEl.style.visibility = 'hidden';
+    taskDescEl.style.display = 'none';
 
-    // Add something small to signal that the task has a description
-    taskTitleEl.textContent += ' ↩️';
+    // Colour 'bar' element
+    taskBar.classList.add('task-bar-desc');
 
     taskEl.appendChild(taskDescEl);
   }
@@ -118,14 +123,14 @@ export const toggleTaskTitleDesc = (e, targ = e.target) => {
   if (targ.className !== 'task' || !targ.querySelector('.task-desc')) {
     return;
   }
-  targ.querySelector('.task-title').style.visibility =
-    targ.querySelector('.task-title').style.visibility === 'hidden'
-      ? 'visible'
-      : 'hidden';
-  targ.querySelector('.task-desc').style.visibility =
-    targ.querySelector('.task-desc').style.visibility === 'hidden'
-      ? 'visible'
-      : 'hidden';
+  targ.querySelector('.task-title').style.display =
+    targ.querySelector('.task-title').style.display === 'none'
+      ? 'block'
+      : 'none';
+  targ.querySelector('.task-desc').style.display =
+    targ.querySelector('.task-desc').style.display === 'none'
+      ? 'block'
+      : 'none';
 };
 
 /**

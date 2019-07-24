@@ -101,20 +101,20 @@ describe('toggleTaskTitleDesc', () => {
 
   test('toggles between title and description', () => {
     document.body.innerHTML =
-      '<div class="task"><div class="task-title">Title</div> <div class="task-desc" style="visibility: hidden">Description</div></div>';
+      '<div class="task"><div class="task-title">Title</div> <div class="task-desc" style="display: none">Description</div></div>';
     const taskEl = document.querySelector('.task') as HTMLElement;
     const titleEl = document.querySelector('.task-title') as HTMLElement;
     const descEl = document.querySelector('.task-desc') as HTMLElement;
 
     toggleTaskTitleDesc(mockEv, taskEl);
 
-    expect(titleEl.style.visibility).toBe('hidden');
-    expect(descEl.style.visibility).toBe('visible');
+    expect(titleEl.style.display).toBe('none');
+    expect(descEl.style.display).toBe('block');
 
     toggleTaskTitleDesc(mockEv, taskEl);
 
-    expect(titleEl.style.visibility).toBe('visible');
-    expect(descEl.style.visibility).toBe('hidden');
+    expect(titleEl.style.display).toBe('block');
+    expect(descEl.style.display).toBe('none');
   });
 });
 

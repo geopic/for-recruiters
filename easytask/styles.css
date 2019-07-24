@@ -58,7 +58,7 @@ button {
 form button {
   display: block;
   margin: 10px auto;
-  width: 180px;
+  width: 100px;
 }
 
 h2 {
@@ -90,49 +90,70 @@ footer {
 }
 
 .task {
-  display: grid;
-  grid-template-areas:
-    '. btns'
-    'titledesc btns'
-    '. btns';
+  align-items: center;
+  display: flex;
+  height: 30px;
   justify-content: space-between;
-  padding: 3px;
 }
 
 .task:nth-of-type(2n) {
   background-color: #e0e0e0;
 }
 
-.task > * {
-  padding: 5px;
+.task-bar {
+  background-color: darkgray;
+  border-right: 1px solid black;
+  display: block;
+  height: 100%;
+  width: 5px;
+}
+
+.task-bar-desc {
+  background-color: forestgreen;
 }
 
 .task-title {
   margin: 0px;
 }
 
-.task-title,
-.task-desc {
-  grid-area: titledesc;
-}
-
-.task-btns {
-  grid-area: btns;
-}
-
 /** IDS **/
 
 @media all and (min-width: 500px) {
+  /** GLOBALS **/
+
+  /** CLASSES **/
+
+  /** IDS **/
 }
 
 @media all and (min-width: 750px) {
+  /** GLOBALS **/
+
+  /** CLASSES **/
+
+  /** IDS **/
 }
 
 @media all and (min-width: 1020px) {
+  /** GLOBALS **/
+
+  /** CLASSES **/
+
+  /** IDS **/
 }
 
 @media all and (min-width: 1400px) {
+  /** GLOBALS **/
+
+  /** CLASSES **/
+
+  /** IDS **/
 }
 
 @media all and (min-width: 1860px) {
+  /** GLOBALS **/
+
+  /** CLASSES **/
+
+  /** IDS **/
 }
