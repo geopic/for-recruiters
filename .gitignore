@@ -1,0 +1,4 @@
+_tests/node_modules
+
+# Human-readable work log file for writing commit messages
+.gitremind
