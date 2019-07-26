@@ -3,6 +3,7 @@ import {
   submitTask,
   amendTask,
   deleteTask,
+  countCharsInField,
   toggleTaskTitleDesc,
   clearAllTasks,
   init
@@ -95,6 +96,26 @@ describe('submitTask', () => {
 describe('amendTask', () => {});
 
 describe('deleteTask', () => {});
+
+describe('countCharsInField', () => {
+  const mockEv = new Event('input');
+
+  test("displays the length of an input field's value correctly", () => {
+    document.body.innerHTML =
+      '<div><input type="text"/><span class="char-count-num"></span></div>';
+
+    const inputEl = document.querySelector('input')!;
+    const countEl = document.querySelector('.char-count-num')!;
+
+    countCharsInField(mockEv, inputEl);
+    expect(+countEl.textContent!).toBe(0);
+
+    inputEl.value = 'foobar';
+
+    countCharsInField(mockEv, inputEl);
+    expect(+countEl.textContent!).toBe(6);
+  });
+});
 
 describe('toggleTaskTitleDesc', () => {
   const mockEv = new Event('mouseenter');
