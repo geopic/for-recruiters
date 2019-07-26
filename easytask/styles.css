@@ -94,6 +94,7 @@ footer {
   display: flex;
   height: 30px;
   justify-content: space-between;
+  overflow-y: scroll;
 }
 
 .task:nth-of-type(2n) {
@@ -112,8 +113,15 @@ footer {
   background-color: forestgreen;
 }
 
-.task-title {
+.task-title,
+.task-desc {
   margin: 0px;
+}
+
+.task-desc {
+  align-self: flex-start;
+  overflow-y: scroll;
+  width: 50%;
 }
 
 /** IDS **/
@@ -130,6 +138,11 @@ footer {
   /** GLOBALS **/
 
   /** CLASSES **/
+  .task-desc {
+    align-self: inherit;
+    overflow-y: none;
+    width: inherit;
+  }
 
   /** IDS **/
 }

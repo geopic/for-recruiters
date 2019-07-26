@@ -70,7 +70,7 @@ const mixinAddTaskToDOM = task => {
 
 /**
  * @description Task submit function.
- * @param {Event} e submit event via form.
+ * @param {Event} e Submit event via form.
  */
 export const submitTask = e => {
   e.preventDefault();
@@ -115,9 +115,19 @@ export const amendTask = () => {};
 export const deleteTask = () => {};
 
 /**
+ * @description Displays CURRENT char-count in input and textarea fields as well as max amount allowed.
+ * @param {Event} e Input event.
+ * @param {EventTarget} targ For unit tests only.
+ */
+export const countCharsInField = (e, targ = e.target) => {
+  const parentEl = targ.parentElement;
+  parentEl.querySelector('.char-count-num').textContent = targ.value.length;
+};
+
+/**
  * @description Handler which runs on mouseenter and mouseleave events on each task element.
- * @param {Event} e Mouseenter, mouseleave event
- * @param {EventTarget} targ For unit tests only
+ * @param {Event} e Mouseenter, mouseleave event.
+ * @param {EventTarget} targ For unit tests only.
  */
 export const toggleTaskTitleDesc = (e, targ = e.target) => {
   if (targ.className !== 'task' || !targ.querySelector('.task-desc')) {
@@ -165,11 +175,25 @@ export const init = () => {
     }
   }
 
+  // Programmatically add char counts to title and desc fields in form
+  document.querySelectorAll('label').forEach(label => {
+    console.log(label);
+    label.innerHTML += `<div class="form-char-count"><span class="char-count-num">0</span> / ${
+      label.nextElementSibling.maxLength
+    } chars</div>`;
+  });
+
   // Focus on 'title' input
   document.getElementById('task-title').focus();
 
   // Apply handlers to events not yet handled
   document.querySelector('form').addEventListener('submit', submitTask);
+
+  const taskNameField = document.getElementById('task-title');
+  const taskDescField = document.getElementById('task-description');
+
+  taskNameField.addEventListener('input', countCharsInField);
+  taskDescField.addEventListener('input', countCharsInField);
 
   document
     .getElementById('clear-all-tasks')
