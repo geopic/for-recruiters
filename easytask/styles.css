@@ -140,7 +140,7 @@ footer {
   /** CLASSES **/
   .task-desc {
     align-self: inherit;
-    overflow-y: none;
+    overflow-y: hidden;
     width: inherit;
   }
 

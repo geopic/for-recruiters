@@ -177,7 +177,6 @@ export const init = () => {
 
   // Programmatically add char counts to title and desc fields in form
   document.querySelectorAll('label').forEach(label => {
-    console.log(label);
     label.innerHTML += `<div class="form-char-count"><span class="char-count-num">0</span> / ${
       label.nextElementSibling.maxLength
     } chars</div>`;
