@@ -95,7 +95,59 @@ describe('submitTask', () => {
 
 describe('amendTask', () => {});
 
-describe('deleteTask', () => {});
+describe('deleteTask', () => {
+  beforeEach(() => {
+    const data = [
+      { title: 'foo', desc: 'bar' },
+      { title: 'baz', desc: 'hello' }
+    ];
+    localStorage.setItem(values.locStorageKey, JSON.stringify(data));
+    for (const entry of data) {
+      document.body.innerHTML += `<div class="task"><div class="task-title">${
+        entry.title
+      }</div><div class="task-desc">${entry.desc}</div></div>`;
+    }
+  });
+
+  // Complex DOM work involved...
+  const mockEv = {
+    target: {
+      parentElement: {
+        parentElement: {
+          remove: () => document.querySelector('.task')!.remove()
+        }
+      }
+    }
+  };
+
+  window.confirm = (str: string) => true;
+
+  test('deletes the task from localStorage', () => {
+    deleteTask(mockEv, { title: 'foo', desc: 'bar' });
+
+    const lsData = JSON.parse(localStorage.getItem(
+      values.locStorageKey
+    ) as string);
+
+    expect(lsData.length).toBe(1);
+    expect(lsData[0]).toEqual({ title: 'baz', desc: 'hello' });
+
+    deleteTask(mockEv, { title: 'baz', desc: 'hello' });
+    expect(localStorage.getItem(values.locStorageKey)).toBeNull();
+  });
+
+  test('updates the DOM', () => {
+    deleteTask(mockEv, { title: 'foo', desc: 'bar' });
+    expect(document.body.textContent).not.toMatch(/foo|bar/);
+
+    expect(document.querySelectorAll('.task-title').length).toBe(1);
+    expect(document.querySelectorAll('.task-desc').length).toBe(1);
+
+    deleteTask(mockEv, { title: 'baz', desc: 'hello' });
+    expect(document.querySelector('.task-title')).toBeNull();
+    expect(document.body.textContent).toMatch('no tasks');
+  });
+});
 
 describe('countCharsInField', () => {
   const mockEv = new Event('input');

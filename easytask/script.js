@@ -44,6 +44,9 @@ const mixinAddTaskToDOM = task => {
   taskBtns.classList.add('task-btns');
   taskEl.appendChild(taskBtns);
 
+  // Add data attribute to make amending / deleting individual tasks easier
+  taskBtns.dataset.task = JSON.stringify(task);
+
   // 'Amend task' button
   const amendTaskBtn = document.createElement('button');
   amendTaskBtn.type = 'button';
@@ -66,6 +69,25 @@ const mixinAddTaskToDOM = task => {
   taskEl.addEventListener('touchstart', toggleTaskTitleDesc);
 
   document.getElementById('tasklist').appendChild(taskEl);
+};
+
+/**
+ * @description Compares two objects to check if they are identical.
+ * @param {object} obj1 First object to compare.
+ * @param {object} obj2 Second object to compare.
+ * @returns {boolean} True if objects are identical, false if not.
+ * @mixin
+ */
+const mixinCompareObjects = (obj1, obj2) => {
+  return Object.is(obj1, obj2);
+  console.log(obj1, obj2);
+  for (const prop in obj1) {
+    if (!obj2.hasOwnProperty(prop)) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 /**
@@ -112,7 +134,48 @@ export const submitTask = e => {
 
 export const amendTask = () => {};
 
-export const deleteTask = () => {};
+/**
+ * @description Removes specific task from localStorage and from the DOM.
+ * @param {Event} e Click event.
+ * @param {EventTarget} task For unit tests only.
+ */
+export const deleteTask = (e, task = null) => {
+  const taskToDelete = task
+    ? task
+    : JSON.parse(e.target.parentElement.dataset.task);
+
+  if (
+    window.confirm(
+      `Delete task "${taskToDelete.title}"${
+        taskToDelete.desc ? `with description "${taskToDelete.desc}"` : ``
+      }? This action cannot be undone.`
+    )
+  ) {
+    // Remove from LS
+    const newData = values.data();
+
+    // Check if last task remaining, if so then clear whole LS entry
+    if (newData.length === 1) {
+      clearAllTasks();
+    } else {
+      let indexToRemove;
+
+      newData.forEach((entry, index) => {
+        if (
+          entry.title === taskToDelete.title &&
+          entry.desc === taskToDelete.desc
+        ) {
+          indexToRemove = index;
+        }
+      });
+      newData.splice(indexToRemove, 1);
+      localStorage.setItem(values.locStorageKey, JSON.stringify(newData));
+
+      // Remove from DOM
+      e.target.parentElement.parentElement.remove();
+    }
+  }
+};
 
 /**
  * @description Displays CURRENT char-count in input and textarea fields as well as max amount allowed.
