@@ -15,6 +15,9 @@ const mixinAddTaskToDOM = task => {
   const taskEl = document.createElement('div');
   taskEl.classList.add('task');
 
+  // Add task id in data attribute to make amending / deleting individual tasks easier
+  taskEl.dataset.id = task.id;
+
   // 'Bar' element on side of task, coloured if task has a description
   const taskBar = document.createElement('div');
   taskBar.classList.add('task-bar');
@@ -44,9 +47,6 @@ const mixinAddTaskToDOM = task => {
   taskBtns.classList.add('task-btns');
   taskEl.appendChild(taskBtns);
 
-  // Add data attribute to make amending / deleting individual tasks easier
-  taskBtns.dataset.task = JSON.stringify(task);
-
   // 'Amend task' button
   const amendTaskBtn = document.createElement('button');
   amendTaskBtn.type = 'button';
@@ -72,25 +72,6 @@ const mixinAddTaskToDOM = task => {
 };
 
 /**
- * @description Compares two objects to check if they are identical.
- * @param {object} obj1 First object to compare.
- * @param {object} obj2 Second object to compare.
- * @returns {boolean} True if objects are identical, false if not.
- * @mixin
- */
-const mixinCompareObjects = (obj1, obj2) => {
-  return Object.is(obj1, obj2);
-  console.log(obj1, obj2);
-  for (const prop in obj1) {
-    if (!obj2.hasOwnProperty(prop)) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-/**
  * @description Task submit function.
  * @param {Event} e Submit event via form.
  */
@@ -100,16 +81,19 @@ export const submitTask = e => {
   const titleInput = document.getElementById('task-title');
   const descInput = document.getElementById('task-description');
 
+  // Return early if title field hasn't been filled in
+  if (!titleInput.value) {
+    return;
+  }
+
   // Grab values from fields in form
   const inputVals = {
+    id: `${titleInput.value.substring(0, 3)}-${
+      values.data() ? values.data().length : 0
+    }`,
     title: titleInput.value,
     desc: descInput.value
   };
-
-  // Return early if title field hasn't been filled in
-  if (!inputVals.title) {
-    return;
-  }
 
   // Grab data array from LS or make new array
   const arr = values.data() ? values.data() : [];
@@ -132,7 +116,80 @@ export const submitTask = e => {
   titleInput.focus();
 };
 
-export const amendTask = () => {};
+/**
+ * @description Amends (edits) specific task in localStorage with changes reflected in the DOM.
+ * @param {Event} e Click event.
+ * @param {string | null} taskId For unit tests only.
+ */
+export const amendTask = (e, taskId = null) => {
+  const idTaskToAmend = taskId
+    ? taskId
+    : e.target.parentElement.parentElement.dataset.id;
+
+  const data = values.data();
+  let taskToAmend;
+  let taskToAmendIndex;
+
+  data.forEach((entry, index) => {
+    if (entry.id === idTaskToAmend) {
+      taskToAmend = entry;
+      taskToAmendIndex = index;
+    }
+  });
+
+  // Get new task title and description using ol' fashioned window.prompt()
+  const newTaskTitle = window.prompt(
+    `(1 of 2) Please specify an amended title (current title: "${
+      taskToAmend.title
+    }")`
+  );
+
+  const newTaskDesc = window.prompt(
+    `(2 of 2) Please specify an amended description${
+      taskToAmend.desc ? ` (current description: "${taskToAmend.desc}")` : ``
+    }. Leave blank for no description.`
+  );
+
+  // If user cancels at either step then the value will be null
+  if (!newTaskTitle && !newTaskDesc) {
+    return;
+  }
+
+  // Change task to new details
+  taskToAmend.id = `${newTaskTitle.substring(0, 3)}-${values.data().length}`;
+  taskToAmend.title = newTaskTitle;
+  taskToAmend.desc = newTaskDesc;
+
+  // Change data then resave to localStorage
+  data.splice(taskToAmendIndex, 1, taskToAmend);
+  localStorage.setItem(values.locStorageKey, JSON.stringify(data));
+
+  // Amend in DOM
+  const taskEl = e.target.parentElement.parentElement;
+  const taskTitleEl = taskEl.querySelector('.task-title');
+  const taskDescEl = taskEl.querySelector('.task-desc') || null;
+
+  taskTitleEl.textContent = newTaskTitle;
+
+  if (taskDescEl && newTaskDesc.length === 0) {
+    // Task element exists, it no longer should, so remove it
+    taskDescEl.remove();
+  } else if (!taskDescEl && newTaskDesc.length > 0) {
+    // Create task desc element
+    const newTaskDescEl = document.createElement('div');
+    newTaskDescEl.classList.add('task-desc');
+    newTaskDescEl.textContent = newTaskDesc;
+
+    // Hide desc until user hovers over task
+    newTaskDescEl.style.display = 'none';
+
+    taskEl.insertBefore(newTaskDescEl, taskEl.querySelector('.task-btns'));
+  } else {
+    taskDescEl.textContent = newTaskDesc;
+  }
+
+  taskEl.data.id = taskToAmend.id;
+};
 
 /**
  * @description Removes specific task from localStorage and from the DOM.
@@ -147,7 +204,7 @@ export const deleteTask = (e, task = null) => {
   if (
     window.confirm(
       `Delete task "${taskToDelete.title}"${
-        taskToDelete.desc ? `with description "${taskToDelete.desc}"` : ``
+        taskToDelete.desc ? ` with description "${taskToDelete.desc}"` : ``
       }? This action cannot be undone.`
     )
   ) {
@@ -168,6 +225,7 @@ export const deleteTask = (e, task = null) => {
           indexToRemove = index;
         }
       });
+
       newData.splice(indexToRemove, 1);
       localStorage.setItem(values.locStorageKey, JSON.stringify(newData));
 

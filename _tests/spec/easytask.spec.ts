@@ -9,6 +9,24 @@ import {
   init
 } from '../../easytask/script.js';
 
+/**
+ * @description Set up test environment for amendTask and deleteTask.
+ * @mixin
+ */
+const mixinAmendDeleteTaskEnv = () => {
+  const data = [{ title: 'foo', desc: 'bar' }, { title: 'baz', desc: 'hello' }];
+  localStorage.setItem(values.locStorageKey, JSON.stringify(data));
+  for (const entry of data) {
+    document.body.innerHTML += `<div class="task"><div class="task-title">${
+      entry.title
+    }</div><div class="task-desc">${
+      entry.desc
+    }</div><div class="task-btns" data-task="${JSON.stringify(
+      entry
+    )}"></div></div>`;
+  }
+};
+
 beforeEach(() => {
   document.body.innerHTML =
     '<form><input type="text" id="task-title" name="task-title" required /> <textarea id="task-description" name="task-description"></textarea></form> <div id="tasklist"><div id="no-tasks">There are no tasks to display...</div></div> <button type="button" id="clear-all-tasks"></button>';
@@ -93,28 +111,83 @@ describe('submitTask', () => {
   });
 });
 
-describe('amendTask', () => {});
+describe('amendTask', () => {
+  beforeEach(mixinAmendDeleteTaskEnv);
+
+  // Complex DOM work involved...
+  const mockEv = {
+    target: {
+      parentElement: {
+        parentElement: {}
+      }
+    }
+  };
+
+  window.prompt = (str: string) => 'Amended value';
+
+  test('amends the task in localStorage', () => {
+    amendTask(
+      mockEv,
+      { title: 'foo', desc: 'bar' },
+      document.querySelector('.task')
+    );
+
+    expect(
+      JSON.parse(localStorage.getItem(values.locStorageKey) as string)[0]
+    ).toEqual({
+      title: 'Amended value',
+      desc: 'Amended value'
+    });
+
+    amendTask(
+      mockEv,
+      { title: 'baz', desc: 'hello' },
+      document.querySelector('.task')
+    );
+
+    expect(
+      JSON.parse(localStorage.getItem(values.locStorageKey) as string)
+    ).toEqual([
+      {
+        title: 'Amended value',
+        desc: 'Amended value'
+      },
+      {
+        title: 'Amended value',
+        desc: 'Amended value'
+      }
+    ]);
+  });
+
+  test('updates the DOM', () => {
+    amendTask(
+      mockEv,
+      { title: 'foo', desc: 'bar' },
+      document.querySelector('.task')
+    );
+
+    expect(document.body.textContent).not.toMatch(/foo|bar/);
+
+    const datasetTask = JSON.parse((document.querySelector(
+      '.task'
+    )! as HTMLElement).dataset.task as string);
+
+    expect(datasetTask).toEqual({
+      title: 'Amended value',
+      desc: 'Amended value'
+    });
+  });
+});
 
 describe('deleteTask', () => {
-  beforeEach(() => {
-    const data = [
-      { title: 'foo', desc: 'bar' },
-      { title: 'baz', desc: 'hello' }
-    ];
-    localStorage.setItem(values.locStorageKey, JSON.stringify(data));
-    for (const entry of data) {
-      document.body.innerHTML += `<div class="task"><div class="task-title">${
-        entry.title
-      }</div><div class="task-desc">${entry.desc}</div></div>`;
-    }
-  });
+  beforeEach(mixinAmendDeleteTaskEnv);
 
   // Complex DOM work involved...
   const mockEv = {
     target: {
       parentElement: {
         parentElement: {
-          remove: () => document.querySelector('.task')!.remove()
+          remove: () => document.querySelector('.task')!.remove() // Note that this removes the first instance of .task only
         }
       }
     }
