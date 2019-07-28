@@ -88,7 +88,7 @@ export const submitTask = e => {
 
   // Grab values from fields in form
   const inputVals = {
-    id: `${titleInput.value.substring(0, 3)}-${
+    id: `${titleInput.value.toLowerCase().substring(0, 3)}-${
       values.data() ? values.data().length : 0
     }`,
     title: titleInput.value,
@@ -141,22 +141,26 @@ export const amendTask = (e, taskId = null) => {
   const newTaskTitle = window.prompt(
     `(1 of 2) Please specify an amended title (current title: "${
       taskToAmend.title
-    }")`
+    }")`,
+    taskToAmend.title
   );
 
   const newTaskDesc = window.prompt(
     `(2 of 2) Please specify an amended description${
       taskToAmend.desc ? ` (current description: "${taskToAmend.desc}")` : ``
-    }. Leave blank for no description.`
+    }. Leave blank for no description.`,
+    taskToAmend.desc
   );
 
   // If user cancels at either step then the value will be null
-  if (!newTaskTitle && !newTaskDesc) {
+  if (!newTaskTitle) {
     return;
   }
 
   // Change task to new details
-  taskToAmend.id = `${newTaskTitle.substring(0, 3)}-${values.data().length}`;
+  taskToAmend.id = `${newTaskTitle
+    .toLowerCase()
+    .substring(0, 3)}-${taskToAmendIndex}`;
   taskToAmend.title = newTaskTitle;
   taskToAmend.desc = newTaskDesc;
 
@@ -165,30 +169,39 @@ export const amendTask = (e, taskId = null) => {
   localStorage.setItem(values.locStorageKey, JSON.stringify(data));
 
   // Amend in DOM
-  const taskEl = e.target.parentElement.parentElement;
+  const taskEl = document.querySelector(`.task[data-id=${idTaskToAmend}]`);
   const taskTitleEl = taskEl.querySelector('.task-title');
   const taskDescEl = taskEl.querySelector('.task-desc') || null;
 
   taskTitleEl.textContent = newTaskTitle;
 
   if (taskDescEl && newTaskDesc.length === 0) {
-    // Task element exists, it no longer should, so remove it
+    // Desc element exists, it no longer should, so remove it
     taskDescEl.remove();
+
+    // Make the side bar grey as well
+    taskEl.querySelector('.task-bar').classList.remove('task-bar-desc');
+
+    // Task title element will have "display: none" style, remove that
+    taskTitleEl.removeAttribute('style');
   } else if (!taskDescEl && newTaskDesc.length > 0) {
     // Create task desc element
     const newTaskDescEl = document.createElement('div');
     newTaskDescEl.classList.add('task-desc');
     newTaskDescEl.textContent = newTaskDesc;
 
-    // Hide desc until user hovers over task
-    newTaskDescEl.style.display = 'none';
+    // Apply display CSS rules
+    taskTitleEl.style.display = 'none';
+    newTaskDescEl.style.display = 'block';
 
     taskEl.insertBefore(newTaskDescEl, taskEl.querySelector('.task-btns'));
+
+    taskEl.querySelector('.task-bar').classList.add('task-bar-desc');
   } else {
     taskDescEl.textContent = newTaskDesc;
   }
 
-  taskEl.data.id = taskToAmend.id;
+  taskEl.dataset.id = taskToAmend.id;
 };
 
 /**

@@ -14,16 +14,17 @@ import {
  * @mixin
  */
 const mixinAmendDeleteTaskEnv = () => {
-  const data = [{ title: 'foo', desc: 'bar' }, { title: 'baz', desc: 'hello' }];
+  const data = [
+    { id: 'foo-0', title: 'foo', desc: 'bar' },
+    { id: 'baz-1', title: 'baz', desc: 'hello' }
+  ];
   localStorage.setItem(values.locStorageKey, JSON.stringify(data));
   for (const entry of data) {
-    document.body.innerHTML += `<div class="task"><div class="task-title">${
-      entry.title
-    }</div><div class="task-desc">${
+    document.body.innerHTML += `<div class="task" data-id="${
+      entry.id
+    }"><div class="task-title">${entry.title}</div><div class="task-desc">${
       entry.desc
-    }</div><div class="task-btns" data-task="${JSON.stringify(
-      entry
-    )}"></div></div>`;
+    }</div><div class="task-btns"></div></div>`;
   }
 };
 
@@ -114,45 +115,33 @@ describe('submitTask', () => {
 describe('amendTask', () => {
   beforeEach(mixinAmendDeleteTaskEnv);
 
-  // Complex DOM work involved...
-  const mockEv = {
-    target: {
-      parentElement: {
-        parentElement: {}
-      }
-    }
-  };
+  const mockEv = new Event('click');
 
   window.prompt = (str: string) => 'Amended value';
 
   test('amends the task in localStorage', () => {
-    amendTask(
-      mockEv,
-      { title: 'foo', desc: 'bar' },
-      document.querySelector('.task')
-    );
+    amendTask(mockEv, 'foo-0');
 
     expect(
       JSON.parse(localStorage.getItem(values.locStorageKey) as string)[0]
     ).toEqual({
+      id: 'ame-0',
       title: 'Amended value',
       desc: 'Amended value'
     });
 
-    amendTask(
-      mockEv,
-      { title: 'baz', desc: 'hello' },
-      document.querySelector('.task')
-    );
+    amendTask(mockEv, 'baz-1');
 
     expect(
       JSON.parse(localStorage.getItem(values.locStorageKey) as string)
     ).toEqual([
       {
+        id: 'ame-0',
         title: 'Amended value',
         desc: 'Amended value'
       },
       {
+        id: 'ame-1',
         title: 'Amended value',
         desc: 'Amended value'
       }
@@ -160,22 +149,23 @@ describe('amendTask', () => {
   });
 
   test('updates the DOM', () => {
-    amendTask(
-      mockEv,
-      { title: 'foo', desc: 'bar' },
-      document.querySelector('.task')
-    );
+    amendTask(mockEv, 'foo-0');
 
     expect(document.body.textContent).not.toMatch(/foo|bar/);
 
-    const datasetTask = JSON.parse((document.querySelector(
-      '.task'
-    )! as HTMLElement).dataset.task as string);
+    expect((document.querySelector('.task')! as HTMLElement).dataset.id).toBe(
+      'ame-0'
+    );
 
-    expect(datasetTask).toEqual({
-      title: 'Amended value',
-      desc: 'Amended value'
-    });
+    expect(document.querySelector('.task')!.children[0]).toEqual(
+      document.querySelector('.task-title')
+    );
+    expect(document.querySelector('.task')!.children[1]).toEqual(
+      document.querySelector('.task-desc')
+    );
+    expect(document.querySelector('.task')!.children[2]).toEqual(
+      document.querySelector('.task-btns')
+    );
   });
 });
 
