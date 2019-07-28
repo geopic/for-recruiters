@@ -186,27 +186,27 @@ describe('deleteTask', () => {
   window.confirm = (str: string) => true;
 
   test('deletes the task from localStorage', () => {
-    deleteTask(mockEv, { title: 'foo', desc: 'bar' });
+    deleteTask(mockEv, 'foo-0');
 
     const lsData = JSON.parse(localStorage.getItem(
       values.locStorageKey
     ) as string);
 
     expect(lsData.length).toBe(1);
-    expect(lsData[0]).toEqual({ title: 'baz', desc: 'hello' });
+    expect(lsData[0]).toEqual({ id: 'baz-1', title: 'baz', desc: 'hello' });
 
-    deleteTask(mockEv, { title: 'baz', desc: 'hello' });
+    deleteTask(mockEv, 'baz-1');
     expect(localStorage.getItem(values.locStorageKey)).toBeNull();
   });
 
   test('updates the DOM', () => {
-    deleteTask(mockEv, { title: 'foo', desc: 'bar' });
+    deleteTask(mockEv, 'foo-0');
     expect(document.body.textContent).not.toMatch(/foo|bar/);
 
     expect(document.querySelectorAll('.task-title').length).toBe(1);
     expect(document.querySelectorAll('.task-desc').length).toBe(1);
 
-    deleteTask(mockEv, { title: 'baz', desc: 'hello' });
+    deleteTask(mockEv, 'baz-1');
     expect(document.querySelector('.task-title')).toBeNull();
     expect(document.body.textContent).toMatch('no tasks');
   });

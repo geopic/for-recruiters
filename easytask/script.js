@@ -207,12 +207,23 @@ export const amendTask = (e, taskId = null) => {
 /**
  * @description Removes specific task from localStorage and from the DOM.
  * @param {Event} e Click event.
- * @param {EventTarget} task For unit tests only.
+ * @param {string | null} taskId For unit tests only.
  */
-export const deleteTask = (e, task = null) => {
-  const taskToDelete = task
-    ? task
-    : JSON.parse(e.target.parentElement.dataset.task);
+export const deleteTask = (e, taskId = null) => {
+  const idTaskToDelete = taskId
+    ? taskId
+    : e.target.parentElement.parentElement.dataset.id;
+
+  const data = values.data();
+  let taskToDelete;
+  let taskToDeleteIndex;
+
+  data.forEach((entry, index) => {
+    if (entry.id === idTaskToDelete) {
+      taskToDelete = entry;
+      taskToDeleteIndex = index;
+    }
+  });
 
   if (
     window.confirm(
@@ -221,26 +232,12 @@ export const deleteTask = (e, task = null) => {
       }? This action cannot be undone.`
     )
   ) {
-    // Remove from LS
-    const newData = values.data();
-
     // Check if last task remaining, if so then clear whole LS entry
-    if (newData.length === 1) {
+    if (data.length === 1) {
       clearAllTasks();
     } else {
-      let indexToRemove;
-
-      newData.forEach((entry, index) => {
-        if (
-          entry.title === taskToDelete.title &&
-          entry.desc === taskToDelete.desc
-        ) {
-          indexToRemove = index;
-        }
-      });
-
-      newData.splice(indexToRemove, 1);
-      localStorage.setItem(values.locStorageKey, JSON.stringify(newData));
+      data.splice(taskToDeleteIndex, 1);
+      localStorage.setItem(values.locStorageKey, JSON.stringify(data));
 
       // Remove from DOM
       e.target.parentElement.parentElement.remove();
