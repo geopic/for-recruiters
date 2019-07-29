@@ -91,10 +91,12 @@ footer {
 
 .task {
   align-items: center;
-  display: flex;
-  height: 30px;
-  justify-content: space-between;
-  overflow-y: scroll;
+  display: grid;
+  grid-template-areas:
+    'bar titledesc'
+    'bar btns';
+  grid-template-columns: 5px 1fr;
+  grid-template-rows: 50px 1fr;
 }
 
 .task:nth-of-type(2n) {
@@ -104,9 +106,8 @@ footer {
 .task-bar {
   background-color: darkgray;
   border-right: 1px solid black;
-  display: block;
+  grid-area: bar;
   height: 100%;
-  width: 5px;
 }
 
 .task-bar-desc {
@@ -115,13 +116,20 @@ footer {
 
 .task-title,
 .task-desc {
+  grid-area: titledesc;
   margin: 0px;
+  overflow-y: scroll;
+  text-align: center;
 }
 
-.task-desc {
-  align-self: flex-start;
-  overflow-y: scroll;
-  width: 50%;
+.task-btns {
+  grid-area: btns;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.task-btns > * {
+  margin: 0px 5px;
 }
 
 /** IDS **/
@@ -132,16 +140,41 @@ footer {
   /** CLASSES **/
 
   /** IDS **/
+  #task-display {
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    margin: 0px auto 10px auto;
+    width: 80%;
+  }
 }
 
-@media all and (min-width: 750px) {
+@media all and (min-width: 700px) {
   /** GLOBALS **/
+  label {
+    font-size: 14px;
+  }
 
   /** CLASSES **/
+  .task {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .task-bar {
+    flex-basis: 5px;
+    height: 40px;
+  }
+
+  .task-title,
   .task-desc {
-    align-self: inherit;
+    margin: 0px;
     overflow-y: hidden;
-    width: inherit;
+  }
+
+  .task-btns {
+    margin-bottom: 0px;
   }
 
   /** IDS **/
@@ -153,18 +186,20 @@ footer {
   /** CLASSES **/
 
   /** IDS **/
+  #task-display {
+    width: 960px;
+  }
 }
 
 @media all and (min-width: 1400px) {
   /** GLOBALS **/
-
-  /** CLASSES **/
-
-  /** IDS **/
-}
-
-@media all and (min-width: 1860px) {
-  /** GLOBALS **/
+  body {
+    border: 1px solid darkgrey;
+    border-bottom: 0px;
+    border-top: 0px;
+    margin: 0px auto;
+    width: 1320px;
+  }
 
   /** CLASSES **/
 
