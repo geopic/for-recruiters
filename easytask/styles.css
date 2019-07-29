@@ -30,9 +30,12 @@ main {
 }
 
 h1 {
+  align-items: center;
   background-color: lightblue;
+  display: flex;
   font-size: 18px;
   font-weight: normal;
+  justify-content: space-evenly;
   padding: 10px;
   text-align: center;
 }
@@ -133,6 +136,16 @@ footer {
 }
 
 /** IDS **/
+#task-display-key {
+  font-size: 16px;
+}
+
+#task-display-key-has-desc {
+  background-color: forestgreen;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+}
 
 @media all and (min-width: 500px) {
   /** GLOBALS **/
