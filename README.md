@@ -1,6 +1,6 @@
 # Projects for recruiters
 
-In this repository I have many simple projects written in languages, libraries and tools which are currently being used in the web & software development industry. If you are here then it's likely that you are a recruiter who has received my application for a vacant position. Take a look around!
+In this repository I have many simple projects written in languages, libraries and tools which are currently being used in the web & software development industry. If you are here then it's likely that you are a recruiter who has received my application for a vacant position. Take a look around (screenshots are available)!
 
 ## Contents (with keywords)
 
