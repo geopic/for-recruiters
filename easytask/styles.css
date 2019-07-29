@@ -147,6 +147,12 @@ footer {
   width: 12px;
 }
 
+#no-tasks {
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+}
+
 @media all and (min-width: 500px) {
   /** GLOBALS **/
 
@@ -201,6 +207,10 @@ footer {
   /** IDS **/
   #task-display {
     width: 960px;
+  }
+
+  #no-tasks {
+    font-size: 16px;
   }
 }
 
