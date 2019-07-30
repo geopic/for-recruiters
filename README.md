@@ -4,25 +4,25 @@ In this repository I have many simple projects written in languages, libraries a
 
 ## Contents (with keywords)
 
-| Language, library, tool, concept                                      | Examples of work within repo |
-| --------------------------------------------------------------------- | ---------------------------- |
-| CSS3                                                                  | [easytask](easytask)         |
-| CSS libraries, e.g. Bootstrap, Foundation etc                         | tbd                          |
-| External API (application programming interface)                      | tbd                          |
-| HTML5                                                                 | [easytask](easytask)         |
-| JavaScript ('vanilla', 'ES5', 'ES6', 'ES7', 'ES8', 'ES9'...) (**\***) | [easytask](easytask)         |
-| Jest (unit testing) (**\***)                                          | [\_tests](_tests)            |
-| jQuery                                                                | tbd                          |
-| JSON                                                                  | tbd                          |
-| MySQL                                                                 | tbd                          |
-| Node ('Node.js') (**\***)                                             | [\_tests](_tests)            |
-| OOP (object-oriented programming) (**\***)                            | tbd                          |
-| PHP                                                                   | tbd                          |
-| React                                                                 | tbd                          |
-| SCSS ('Sass 3') (**\***)                                              | tbd                          |
-| TypeORM (**\***)                                                      | tbd                          |
-| TypeScript (**\***)                                                   | [\_tests](_tests)            |
-| Vue (**\***)                                                          | tbd                          |
+| Language, library, tool, concept                                      | Examples of work within repo                       |
+| --------------------------------------------------------------------- | -------------------------------------------------- |
+| CSS3                                                                  | [easytask](easytask)                               |
+| CSS libraries, e.g. Bootstrap, Foundation etc                         | [emojiweather](emojiweather)                       |
+| External API (application programming interface)                      | [emojiweather](emojiweather)                       |
+| HTML5                                                                 | [easytask](easytask), [emojiweather](emojiweather) |
+| JavaScript ('vanilla', 'ES5', 'ES6', 'ES7', 'ES8', 'ES9'...) (**\***) | [easytask](easytask)                               |
+| Jest (unit testing) (**\***)                                          | [\_tests](_tests)                                  |
+| jQuery                                                                | [emojiweather](emojiweather)                       |
+| JSON                                                                  | [emojiweather](emojiweather)                       |
+| MySQL                                                                 | tbd                                                |
+| Node ('Node.js') (**\***)                                             | [\_tests](_tests)                                  |
+| OOP (object-oriented programming) (**\***)                            | tbd                                                |
+| PHP                                                                   | tbd                                                |
+| React                                                                 | tbd                                                |
+| SCSS ('Sass 3') (**\***)                                              | tbd                                                |
+| TypeORM (**\***)                                                      | tbd                                                |
+| TypeScript (**\***)                                                   | [\_tests](_tests)                                  |
+| Vue (**\***)                                                          | tbd                                                |
 
 (**\***) Examples of these within larger projects are also available in separate repositories:
 
