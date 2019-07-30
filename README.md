@@ -16,6 +16,7 @@ In this repository I have many simple projects written in languages, libraries a
 | JSON                                                                  | tbd                          |
 | MySQL                                                                 | tbd                          |
 | Node ('Node.js') (**\***)                                             | [\_tests](_tests)            |
+| OOP (object-oriented programming) (**\***)                            | tbd                          |
 | PHP                                                                   | tbd                          |
 | React                                                                 | tbd                          |
 | SCSS ('Sass 3') (**\***)                                              | tbd                          |
@@ -28,7 +29,7 @@ In this repository I have many simple projects written in languages, libraries a
 - https://github.com/tedjenkins/forum
 - https://github.com/tedjenkins/vue-clicker
 
-All projects utilise object-oriented programming (OOP) and responsive 'mobile-first' design.
+All projects utilise responsive 'mobile-first' design.
 
 ## Testing
 
