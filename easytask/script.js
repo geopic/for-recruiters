@@ -119,9 +119,9 @@ export const submitTask = e => {
 /**
  * @description Amends (edits) specific task in localStorage with changes reflected in the DOM.
  * @param {Event} e Click event.
- * @param {string | null} taskId For unit tests only.
+ * @param {string | undefined} taskId For unit tests only.
  */
-export const amendTask = (e, taskId = null) => {
+export const amendTask = (e, taskId = undefined) => {
   const idTaskToAmend = taskId
     ? taskId
     : e.target.parentElement.parentElement.dataset.id;
@@ -152,7 +152,7 @@ export const amendTask = (e, taskId = null) => {
     taskToAmend.desc
   );
 
-  // If user cancels at either step then the value will be null
+  // If user cancels at either step then the value will be undefined
   if (!newTaskTitle) {
     return;
   }
@@ -206,10 +206,10 @@ export const amendTask = (e, taskId = null) => {
 
 /**
  * @description Removes specific task from localStorage and from the DOM.
- * @param {Event} e Click event.
- * @param {string | null} taskId For unit tests only.
+ * @param {Event | object} e Click event. An object literal when in unit tests.
+ * @param {string | undefined} taskId For unit tests only.
  */
-export const deleteTask = (e, taskId = null) => {
+export const deleteTask = (e, taskId = undefined) => {
   const idTaskToDelete = taskId
     ? taskId
     : e.target.parentElement.parentElement.dataset.id;

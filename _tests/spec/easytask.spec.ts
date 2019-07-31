@@ -7,7 +7,7 @@ import {
   toggleTaskTitleDesc,
   clearAllTasks,
   init
-} from '../../easytask/script.js';
+} from 'easytask/script.js';
 
 /**
  * @description Set up test environment for amendTask and deleteTask.

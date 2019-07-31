@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "..",
     "types": ["jest", "node"],
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
