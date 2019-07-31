@@ -35,12 +35,9 @@
     <div class="text-center" id="site-intro">Your local weather in emoji style. 😎</div>
     <form>
       <input type="text" id="city-input" placeholder="Enter your local city here..." />
-      <div><button type="submit" class="button hollow">Find local weather</button></div>
+      <div><button type="submit" class="button hollow">Get local weather</button></div>
     </form>
-    <div class="callout large" id="site-weather-display">
-      <div>Weather will be displayed here...</div>
-      <progress class="progress" max="100" value="75"></progress>
-    </div>
+    <div class="callout large hide" id="site-weather-display"></div>
   </main>
   <footer class="text-center">
     &copy; 2019 | <a href="https://github.com/tedjenkins/for-recruiters/tree/master/emojiweather">See code on
@@ -52,7 +49,7 @@
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js"
     integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw=="
     crossorigin="anonymous"></script>
-  <script src="./script.js"></script>
+  <script type="module" src="./script.js"></script>
 </body>
 
 </html>
