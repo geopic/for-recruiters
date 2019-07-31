@@ -37,4 +37,4 @@ To run tests, `cd` into [\_tests](_tests), run `npm install` and then `npm test`
 
 ## License
 
-Unlicense
+MIT
