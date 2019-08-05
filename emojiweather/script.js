@@ -1,5 +1,3 @@
-const displayEl = $('#site-weather-display');
-
 /**
  * @description Form submit event handling starting point.
  * @param {Event} e Form submit event.
@@ -33,40 +31,37 @@ export const handleSubmitSuccess = json => {
 
   // Set up main display
   $.each(json.list, (index, entry) => {
-    const box = document.createElement('div');
-    box.classList.add('weather-box');
+    const box = $('<div class="weather-box"></div>');
 
     // Date
-    const dtEl = document.createElement('div');
-    dtEl.classList.add('weather-box-date');
-    dtEl.textContent = moment(entry.dt_txt).format('ddd, hA');
-    box.appendChild(dtEl);
+    const dtEl = $(
+      `<div class="weather-box-date">${moment(entry.dt_txt, 'ddd, hA')}</div>`
+    );
+    box.append(dtEl);
 
     // Emoji icon
-    const icEl = document.createElement('div');
-    icEl.classList.add('weather-box-icon');
-    icEl.textContent = '<insert emoji here>';
-    box.appendChild(icEl);
+    const icEl = $('<div class="weather-box-icon"><insert emoji here></div>');
+    box.append(icEl);
 
     // Temperature
-    const tempEl = document.createElement('div');
-    tempEl.classList.add('weather-box-temp');
-    tempEl.textContent = `${entry.main.temp.toFixed()}°C`;
-    box.appendChild(tempEl);
+    const tempEl = $(
+      `<div class="weather-box-temp">${entry.main.temp.toFixed()}°C</div>`
+    );
+    box.append(tempEl);
 
     // Cloudiness
-    const cldEl = document.createElement('div');
-    cldEl.classList.add('weather-box-cloudiness');
-    cldEl.textContent = `${entry.clouds.all}% cloudy`;
-    box.appendChild(cldEl);
+    const cldEl = $(
+      `<div class="weather-box-cloudiness">${entry.clouds.all}% cloudy</div>`
+    );
+    box.append(cldEl);
 
     // Wind
-    const wndEl = document.createElement('div');
-    wndEl.classList.add('weather-box-wind');
-    wndEl.textContent = `Wind: ${entry.wind.speed.toFixed()}mph, ${entry.wind.deg.toFixed()}°`;
-    box.appendChild(wndEl);
+    const wndEl = $(
+      `<div class="weather-box-wind">Wind: ${entry.wind.speed.toFixed()}mph, ${entry.wind.deg.toFixed()}°</div>`
+    );
+    box.append(wndEl);
 
-    displayEl.append(box);
+    $('#site-weather-display').append(box);
   });
 };
 
@@ -77,7 +72,7 @@ export const handleSubmitSuccess = json => {
  * @param {string} err Error message.
  */
 export const handleSubmitError = (xhr, status, err) => {
-  displayEl.text(`Error in fetching weather data: "${err}"`);
+  $('#site-weather-display').text(`Error in fetching weather data: "${err}"`);
 };
 
 /**
@@ -88,7 +83,7 @@ export const handleSubmitAlways = () => {
   $('#city-input').focus();
 
   // Make main display visible
-  displayEl.removeClass('hide');
+  $('#site-weather-display').removeClass('hide');
 };
 
 // Initialise application
