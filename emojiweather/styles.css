@@ -13,25 +13,30 @@ form div {
 /** CLASSES **/
 .weather-box {
   align-items: center;
-  border: 1px solid black;
-  border-radius: 10px;
   display: grid;
+  font-size: 15px;
   grid-template-areas:
     'date date'
-    '. temp'
+    'icon temp'
     'icon cloudiness'
-    '. wind';
+    'icon wind';
   margin: 10px;
   padding: 10px;
+  text-align: right;
+  width: 100%;
 }
 
 .weather-box-date {
+  font-size: 18px;
+  font-weight: bold;
   grid-area: date;
   text-align: center;
 }
 
 .weather-box-icon {
+  font-size: 32px;
   grid-area: icon;
+  text-align: center;
 }
 
 .weather-box-temp {
@@ -50,14 +55,25 @@ form div {
 #site-weather-display {
   align-items: center;
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: column;
   justify-content: center;
 }
 
 @media all and (min-width: 500px) {
+  /** CLASSES **/
+  .weather-box {
+    flex: 0 1 400px;
+    font-size: 18px;
+  }
+
+  /** IDS **/
+  #site-weather-display {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
 }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 800px) {
 }
 
 @media all and (min-width: 1020px) {

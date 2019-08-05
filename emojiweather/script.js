@@ -9,6 +9,7 @@ export const handleSubmit = e => {
   $.ajax({
     url: 'https://api.openweathermap.org/data/2.5/forecast',
     data: {
+      cnt: 5,
       q: $('#city-input').val(),
       units: 'metric',
       APPID: '2ee8b797967566459f0a37dcd5db6a86'
@@ -29,35 +30,46 @@ export const handleSubmitSuccess = json => {
   // Clear input field
   $('#city-input').val('');
 
+  // Clear main display
+  $('#site-weather-display').html('');
+
   // Set up main display
   $.each(json.list, (index, entry) => {
-    const box = $('<div class="weather-box"></div>');
+    const box = $('<div class="card weather-box"></div>');
+
+    // Actually going ahead and specifying individual emojis for each code returned from the API would require much more
+    // investment than this project needs. So, instead, everything is cool.
+    const emoji = '😎';
 
     // Date
     const dtEl = $(
-      `<div class="weather-box-date">${moment(entry.dt_txt, 'ddd, hA')}</div>`
+      `<div class="card-divider weather-box-date">${moment(entry.dt_txt).format(
+        'ddd, hA'
+      )}</div>`
     );
     box.append(dtEl);
 
     // Emoji icon
-    const icEl = $('<div class="weather-box-icon"><insert emoji here></div>');
+    const icEl = $(`<div class="card-section weather-box-icon">${emoji}</div>`);
     box.append(icEl);
 
     // Temperature
     const tempEl = $(
-      `<div class="weather-box-temp">${entry.main.temp.toFixed()}°C</div>`
+      `<div class="card-section weather-box-temp">${entry.main.temp.toFixed()}°C</div>`
     );
     box.append(tempEl);
 
     // Cloudiness
     const cldEl = $(
-      `<div class="weather-box-cloudiness">${entry.clouds.all}% cloudy</div>`
+      `<div class="card-section weather-box-cloudiness">${
+        entry.clouds.all
+      }% cloudy</div>`
     );
     box.append(cldEl);
 
     // Wind
     const wndEl = $(
-      `<div class="weather-box-wind">Wind: ${entry.wind.speed.toFixed()}mph, ${entry.wind.deg.toFixed()}°</div>`
+      `<div class="card-section weather-box-wind">Wind: ${entry.wind.speed.toFixed()}mph, ${entry.wind.deg.toFixed()}°</div>`
     );
     box.append(wndEl);
 
