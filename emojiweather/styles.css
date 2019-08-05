@@ -17,10 +17,10 @@ form div {
   border-radius: 10px;
   display: grid;
   grid-template-areas:
-    "date date"
-    ". temp"
-    "icon cloudiness"
-    ". wind";
+    'date date'
+    '. temp'
+    'icon cloudiness'
+    '. wind';
   margin: 10px;
   padding: 10px;
 }
@@ -54,10 +54,14 @@ form div {
   justify-content: center;
 }
 
-@media all and (min-width: 500px) {}
+@media all and (min-width: 500px) {
+}
 
-@media all and (min-width: 700px) {}
+@media all and (min-width: 700px) {
+}
 
-@media all and (min-width: 1020px) {}
+@media all and (min-width: 1020px) {
+}
 
-@media all and (min-width: 1400px) {}
+@media all and (min-width: 1400px) {
+}

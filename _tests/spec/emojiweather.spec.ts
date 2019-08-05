@@ -1,2 +1,15 @@
 import $ from 'jquery';
-import {} from 'emojiweather/script.js';
+import {
+  handleSubmit,
+  handleSubmitSuccess,
+  handleSubmitError,
+  handleSubmitAlways
+} from 'emojiweather/script.js';
+
+describe('handleSubmit', () => {});
+
+describe('handleSubmitSuccess', () => {});
+
+describe('handleSubmitError', () => {});
+
+describe('handleSubmitAlways', () => {});
