@@ -1,0 +1,63 @@
+/** VARIABLES **/
+
+/** GLOBALS **/
+form {
+  margin: 20px auto;
+  width: 80%;
+}
+
+form div {
+  text-align: center;
+}
+
+/** CLASSES **/
+.weather-box {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: grid;
+  grid-template-areas:
+    "date date"
+    ". temp"
+    "icon cloudiness"
+    ". wind";
+  margin: 10px;
+  padding: 10px;
+}
+
+.weather-box-date {
+  grid-area: date;
+  text-align: center;
+}
+
+.weather-box-icon {
+  grid-area: icon;
+}
+
+.weather-box-temp {
+  grid-area: temp;
+}
+
+.weather-box-cloudiness {
+  grid-area: cloudiness;
+}
+
+.weather-box-wind {
+  grid-area: wind;
+}
+
+/** IDS **/
+#site-weather-display {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+@media all and (min-width: 500px) {}
+
+@media all and (min-width: 700px) {}
+
+@media all and (min-width: 1020px) {}
+
+@media all and (min-width: 1400px) {}
