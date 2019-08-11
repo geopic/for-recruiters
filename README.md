@@ -6,7 +6,7 @@ In this repository I have many simple projects written in languages, libraries a
 
 | Language, library, tool, concept                                      | Examples of work within repo                                             |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| CSS3                                                                  | [easytask](easytask)                                                     |
+| CSS3                                                                  | [easytask](easytask), [emojiweather](emojiweather), [tinyblog](tinyblog) |
 | CSS libraries, e.g. Bootstrap, Foundation etc                         | [emojiweather](emojiweather), [tinyblog](tinyblog)                       |
 | External API (application programming interface)                      | [emojiweather](emojiweather)                                             |
 | HTML5                                                                 | [easytask](easytask), [emojiweather](emojiweather), [tinyblog](tinyblog) |
