@@ -14,5 +14,5 @@ session_start();
 </head>
 <body>
   <header>
-    <div id="site-title">tinyblog</div>
+    <h1 class="display-4 text-center" id="site-title">tinyblog</h1>
   </header>
