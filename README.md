@@ -14,7 +14,8 @@ In this repository I have many simple projects written in languages, libraries a
 | Jest (unit testing) (**\***)                                          | [\_tests](_tests)                                                        |
 | jQuery                                                                | [emojiweather](emojiweather), [tinyblog](tinyblog)                       |
 | JSON                                                                  | [emojiweather](emojiweather)                                             |
-| MySQL                                                                 | [tinyblog](tinyblog)                                                     |
+| Laravel                                                               | tbd                                                                      |
+| MySQL (MariaDB)                                                       | [tinyblog](tinyblog)                                                     |
 | Node ('Node.js') (**\***)                                             | [\_tests](_tests)                                                        |
 | OOP (object-oriented programming) (**\***)                            | [tinyblog](tinyblog)                                                     |
 | PHP                                                                   | [tinyblog](tinyblog)                                                     |
