@@ -1,11 +1,15 @@
-CREATE DATABASE tinyblog IF NOT EXISTS;
+CREATE DATABASE IF NOT EXISTS tinyblog;
+
+CREATE USER 'tinybloguser'@'localhost' IDENTIFIED BY 'password123'; 
+
+GRANT ALL PRIVILEGES ON tinyblog.* TO 'tinybloguser'@'localhost';
 
 USE tinyblog;
 
 CREATE TABLE `posts` (
   `id` TINYINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `post_content` TEXT NOT NULL,
-  `post_created` DATETIME NOT NULL,
+  `post_created` DATETIME NOT NULL
 );
 
 CREATE TABLE `comments` (
@@ -17,7 +21,7 @@ CREATE TABLE `comments` (
   CONSTRAINT `fk_post_id`
     FOREIGN KEY (post_id) REFERENCES posts (id)
     ON DELETE CASCADE
-    ON UPDATE RESTRICT,
+    ON UPDATE RESTRICT
 );
 
 CREATE TABLE `meta` (
@@ -25,5 +29,5 @@ CREATE TABLE `meta` (
   `author_username` VARCHAR(32) NOT NULL,
   `author_pw` VARCHAR(32) NOT NULL,
   `blog_name` VARCHAR(64) NOT NULL,
-  `blog_created` DATETIME NOT NULL,
+  `blog_created` DATETIME NOT NULL
 );
