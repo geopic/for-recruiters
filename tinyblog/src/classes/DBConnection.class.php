@@ -50,7 +50,7 @@ Class DBConnection {
      * Closes the database connection
      */
     public function __destruct() {
-		$this->dbc = NULL;
+        $this->dbc = NULL;
 	}
 
     /* Function getPDOConnection
