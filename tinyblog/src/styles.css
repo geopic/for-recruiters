@@ -1,5 +1,12 @@
 /** GLOBALS **/
+footer {
+  padding: 10px;
+  text-align: center;
+}
 
 /** CLASSES **/
 
 /** IDS **/
+#no-blog-detected > * {
+  margin: 5px 0px;
+}

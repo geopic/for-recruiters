@@ -31,3 +31,5 @@ CREATE TABLE `meta` (
   `blog_name` VARCHAR(64) NOT NULL,
   `blog_created` DATETIME NOT NULL
 );
+
+FLUSH PRIVILEGES;
