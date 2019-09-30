@@ -1,3 +1,9 @@
+/**
+ * easytask/script.js
+ * The script file for the 'easytask' project in the 'for-recruiters' repository.
+ * © George Pickering 2019, https://github.com/tedjenkins
+ */
+
 // Site constants, variables
 export const values = {
   locStorageKey: 'easytask-tasks',
@@ -139,9 +145,7 @@ export const amendTask = (e, taskId = undefined) => {
 
   // Get new task title and description using ol' fashioned window.prompt()
   const newTaskTitle = window.prompt(
-    `(1 of 2) Please specify an amended title (current title: "${
-      taskToAmend.title
-    }")`,
+    `(1 of 2) Please specify an amended title (current title: "${taskToAmend.title}")`,
     taskToAmend.title
   );
 
@@ -308,9 +312,7 @@ export const init = () => {
 
   // Programmatically add char counts to title and desc fields in form
   document.querySelectorAll('label').forEach(label => {
-    label.innerHTML += `<div class="form-char-count"><span class="char-count-num">0</span> / ${
-      label.nextElementSibling.maxLength
-    } chars</div>`;
+    label.innerHTML += `<div class="form-char-count"><span class="char-count-num">0</span> / ${label.nextElementSibling.maxLength} chars</div>`;
   });
 
   // Focus on 'title' input

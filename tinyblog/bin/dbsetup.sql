@@ -1,3 +1,9 @@
+/**
+ * tinyblog/bin/dbsetup.sql
+ * The database setup file for the 'tinyblog' project in the 'for-recruiters' repository.
+ * © George Pickering 2019, https://github.com/tedjenkins
+ */
+
 CREATE DATABASE IF NOT EXISTS tinyblog;
 
 CREATE USER 'tinybloguser'@'localhost' IDENTIFIED BY 'password123'; 

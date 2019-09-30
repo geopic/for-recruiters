@@ -1,4 +1,10 @@
 /**
+ * emojiweather/script.js
+ * The script file for the 'emojiweather' project in the 'for-recruiters' repository.
+ * © George Pickering 2019, https://github.com/tedjenkins
+ */
+
+/**
  * @description Form submit event handling starting point.
  * @param {Event} e Form submit event.
  */
@@ -61,9 +67,7 @@ export const handleSubmitSuccess = json => {
 
     // Cloudiness
     const cldEl = $(
-      `<div class="card-section weather-box-cloudiness">${
-        entry.clouds.all
-      }% cloudy</div>`
+      `<div class="card-section weather-box-cloudiness">${entry.clouds.all}% cloudy</div>`
     );
     box.append(cldEl);
 

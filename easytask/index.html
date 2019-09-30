@@ -1,44 +1,70 @@
+<!--
+/**
+ * easytask/index.html
+ * The index file for the 'easytask' project in the 'for-recruiters' repository.
+ * © George Pickering 2019, https://github.com/tedjenkins
+ */
+-->
+
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>EasyTask</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>EasyTask</title>
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
-<body>
-  <header>
-    <div id="site-title">EasyTask</div>
-  </header>
-  <main>
-    <section id="task-submit">
-      <form>
-        <h1>Add new task</h1>
-        <div class="form-section">
-          <label for="task-title">Title:</label>
-          <input type="text" id="task-title" name="task-title" maxlength="24" required />
-        </div>
-        <div class="form-section">
-          <label for="task-description">Description (optional):</label>
-          <textarea id="task-description" name="task-description" maxlength="60"></textarea>
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </section>
-    <section id="task-display">
-      <h1>Tasks <span id="task-display-key">(with description: <span id="task-display-key-has-desc"></span>)</span>
-      </h1>
-      <div id="tasklist"></div>
-    </section>
-  </main>
-  <footer>
-    &copy; 2019 | <a href="https://github.com/tedjenkins/for-recruiters/tree/master/easytask">See code on GitHub</a> |
-    <button type="button" id="clear-all-tasks">Clear all tasks</button>
-  </footer>
-  <script type="module" src="./script.js"></script>
-</body>
-
+  <body>
+    <header>
+      <div id="site-title">EasyTask</div>
+    </header>
+    <main>
+      <section id="task-submit">
+        <form>
+          <h1>Add new task</h1>
+          <div class="form-section">
+            <label for="task-title">Title:</label>
+            <input
+              type="text"
+              id="task-title"
+              name="task-title"
+              maxlength="24"
+              required
+            />
+          </div>
+          <div class="form-section">
+            <label for="task-description">Description (optional):</label>
+            <textarea
+              id="task-description"
+              name="task-description"
+              maxlength="60"
+            ></textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+      <section id="task-display">
+        <h1>
+          Tasks
+          <span id="task-display-key"
+            >(with description:
+            <span id="task-display-key-has-desc"></span>)</span
+          >
+        </h1>
+        <div id="tasklist"></div>
+      </section>
+    </main>
+    <footer>
+      &copy; 2019 |
+      <a
+        href="https://github.com/tedjenkins/for-recruiters/tree/master/easytask"
+        >See code on GitHub</a
+      >
+      |
+      <button type="button" id="clear-all-tasks">Clear all tasks</button>
+    </footer>
+    <script type="module" src="./script.js"></script>
+  </body>
 </html>

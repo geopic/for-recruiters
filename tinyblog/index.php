@@ -1,3 +1,11 @@
+<!--
+/**
+ * tinyblog/index.php
+ * The index file for the 'tinyblog' project in the 'for-recruiters' repository.
+ * © George Pickering 2019, https://github.com/tedjenkins
+ */
+-->
+
 <?php
 include_once('./src/inc/header.inc.php');
 ?>
