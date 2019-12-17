@@ -1,7 +1,7 @@
 /**
  * easytask/script.js
  * The script file for the 'easytask' project in the 'for-recruiters' repository.
- * © George Pickering 2019, https://github.com/tedjenkins
+ * © George Pickering 2019, https://github.com/geopic
  */
 
 // Site constants, variables

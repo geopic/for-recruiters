@@ -27,8 +27,7 @@ In this repository I have many simple projects written in languages, libraries a
 
 (**\***) Examples of these within larger projects are also available in separate repositories:
 
-- https://github.com/tedjenkins/forum
-- https://github.com/tedjenkins/vue-clicker
+- https://github.com/geopic/forum
 
 All projects utilise responsive 'mobile-first' design.
 
