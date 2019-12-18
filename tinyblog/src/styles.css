@@ -1,18 +1,11 @@
 /**
  * tinyblog/src/styles.css
- * The stylesheet for the 'tinyblog' project in the 'for-recruiters' repository.
+ * The global stylesheet for the 'tinyblog' project in the 'for-recruiters' repository.
  * © George Pickering 2019, https://github.com/geopic
  */
 
-/** GLOBALS **/
-footer {
-  padding: 10px;
-  text-align: center;
-}
+/** SELECTORS **/
 
 /** CLASSES **/
 
 /** IDS **/
-#no-blog-detected > * {
-  margin: 5px 0px;
-}
