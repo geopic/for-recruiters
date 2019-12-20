@@ -5,7 +5,25 @@
  */
 
 /** SELECTORS **/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 10px 0px;
+}
 
 /** CLASSES **/
+.clickable-div {
+  background-color: skyblue;
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px;
+  user-select: none;
+  width: auto;
+}
 
 /** IDS **/
