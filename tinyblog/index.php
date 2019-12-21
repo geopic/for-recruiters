@@ -35,7 +35,7 @@ include_once('./src/inc/header.inc.php');
             </div>
             <h3 class="display-5 h5">1.1. Specify database setup</h3>
             <div id="form-setup-db-choice-box">
-              <button type="button" class="db-choice-selected">Automatic settings</button><button type="button">Custom settings</button>
+              <button type="button" class="db-choice-selected">Automatic</button><button type="button">Custom</button>
             </div>
             <small id="form-setup-db-choice-info"></small>
           </div>
@@ -78,6 +78,7 @@ include_once('./src/inc/header.inc.php');
   background-color: #eaeaea;
   border: 1px solid black;
   display: inline-block;
+  margin-top: 10px;
   text-align: center;
   width: auto;
 }
@@ -89,6 +90,10 @@ include_once('./src/inc/header.inc.php');
 
 #form-setup-db-choice-box button:active, .db-choice-selected {
   background-color: #ccc;
+}
+
+#form-setup-db-choice-info {
+  padding-left: 5px;
 }
 </style>
 
@@ -125,7 +130,7 @@ $('document').ready(() => {
   const defaultDbSetupDisplay = () => {
     $('#form-setup-db-choice-info').text(dbChoicesInfo.automatic);
     $('#form-blog-setup-database').attr('style', 'opacity: 0.5;');
-    $('#form-blog-setup-database input').attr('disabled', '');
+    $('#form-blog-setup-database input').attr('readonly', '');
     $('#form-blog-setup-database #db-name').val('tinyblog');
     $('#form-blog-setup-database #db-user-name').val('tinyblog_user');
     $('#form-blog-setup-database #db-user-pass').val('');
@@ -147,7 +152,7 @@ $('document').ready(() => {
       } else if (/custom/i.test($(el).text())) {
         $('#form-setup-db-choice-info').text(dbChoicesInfo.custom);
         $('#form-blog-setup-database').removeAttr('style');
-        $('#form-blog-setup-database input').removeAttr('disabled');
+        $('#form-blog-setup-database input').removeAttr('readonly');
       }
 
       $(el).addClass('db-choice-selected');
