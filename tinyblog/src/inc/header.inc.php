@@ -20,3 +20,9 @@ session_start();
   <header>
     <h1 class="display-4 text-center" id="site-title">tinyblog</h1>
   </header>
+
+<style>
+  header {
+    margin: 5px 0px 20px 0px;
+  }
+</style>

@@ -14,8 +14,10 @@ include_once('./src/inc/header.inc.php');
       </div>
     <?php else: ?>
       <section class="container d-flex flex-column flex-wrap" id="no-blog-detected">
-        <div class="align-self-center">It looks like your blog is not yet set up. tinyblog uses MariaDB, so please ensure that it is installed on your system (<a href="https://downloads.mariadb.org/">MariaDB download page</a>).</div>
-        <div class="align-self-center">Please follow the steps below to set up your blog.</div>
+        <div id="no-blog-detected-blurb">
+          <p>It looks like your blog is not yet set up. tinyblog uses MariaDB, so please ensure that it is installed on your system (<a href="https://downloads.mariadb.org/">MariaDB download page</a>).</p>
+          <p>Please follow the steps below to set up your blog.</p>
+        </div>
         <form action="./src/inc/setupblog.inc.php" method="post" id="form-blog-setup">
           <div id="form-blog-setup-general">
             <h2 class="display-5 h3">1. Enter your blog details</h2>
@@ -66,17 +68,18 @@ include_once('./src/inc/header.inc.php');
   </main>
 
 <style>
-#no-blog-detected > * {
-  margin: 5px 0px;
+#no-blog-detected-blurb {
+  text-align: center;
 }
 
-#form-blog-setup-general {
-  margin-bottom: 30px;
+#no-blog-detected-blurb, #form-blog-setup-general, #form-blog-setup-database {
+  margin-bottom: 1.14rem;
 }
 
 #form-setup-db-choice-box {
   background-color: #eaeaea;
   border: 1px solid black;
+  border-radius: 3px;
   display: inline-block;
   margin-top: 10px;
   text-align: center;
