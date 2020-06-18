@@ -15,19 +15,20 @@ In this repository I have many simple projects written in languages, libraries a
 | jQuery                                                                | [emojiweather](emojiweather), [tinyblog](tinyblog)                       |
 | JSON                                                                  | [emojiweather](emojiweather)                                             |
 | Laravel                                                               | tbd                                                                      |
-| MySQL (MariaDB)                                                       | [tinyblog](tinyblog)                                                     |
 | Node ('Node.js') (**\***)                                             | [\_tests](_tests)                                                        |
 | OOP (object-oriented programming) (**\***)                            | [tinyblog](tinyblog)                                                     |
 | PHP                                                                   | [tinyblog](tinyblog)                                                     |
 | React                                                                 | tbd                                                                      |
 | SCSS ('Sass 3') (**\***)                                              | tbd                                                                      |
-| TypeORM (**\***)                                                      | tbd                                                                      |
+| Shell scripting                                                       | tbd                                                                      |
+| SQL                                                                   | [tinyblog](tinyblog)                                                     |
 | TypeScript (**\***)                                                   | [\_tests](_tests)                                                        |
 | Vue (**\***)                                                          | tbd                                                                      |
 
 (**\***) Examples of these within larger projects are also available in separate repositories:
 
 - https://github.com/geopic/forum
+- https://github.com/geopic/xplan
 
 All projects utilise responsive 'mobile-first' design.
 
