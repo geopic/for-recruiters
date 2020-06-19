@@ -1,0 +1,48 @@
+#!/bin/sh
+
+echo "Welcome to shellgame. The game is a simple clone of rock-paper-scissors."
+printf "Please enter the name of your character: "
+read -r name
+echo "Welcome, $name! Please enter either 0 for 'rock', 1 for 'paper' or 2 for 'scissors'."
+read -r choice
+
+if [ "$choice" = "no" ]; then
+  echo "Very rude."
+  exit 1
+fi
+
+# Random number between 1 and 3.
+ai_choice="$(shuf -i 1-3 -n 1)"
+
+# Win boolean value. If set to 1 (true), the player has won.
+win=0
+
+if [ "$choice" -eq "$ai_choice" ]; then
+  echo "It's a tie!"
+elif [ "$choice" -eq 1 ] && [ "$ai_choice" -eq 3 ] ; then
+  echo "Rock beats scissors."
+  win=1
+elif [ "$choice" -eq 2 ] && [ "$ai_choice" -eq 1 ] ; then
+  echo "Paper beats rock."
+  win=1
+elif [ "$choice" -eq 3 ] && [ "$ai_choice" -eq 2 ] ; then
+  echo "Scissors beat paper."
+  win=1
+elif [ "$choice" -eq 3 ] && [ "$ai_choice" -eq 1 ] ; then
+  echo "Rock beats scissors."
+elif [ "$choice" -eq 1 ] && [ "$ai_choice" -eq 2 ] ; then
+  echo "Paper beats rock."
+elif [ "$choice" -eq 2 ] && [ "$ai_choice" -eq 3 ] ; then
+  echo "Scissors beat paper."
+else
+  printf "%b" "Something weird has happened...\nYour choice: $choice\nAI choice: $ai_choice\nWin value: $win\n"
+  exit 1
+fi
+
+if win=1; then
+  echo "You win against the AI!"
+elif win=0; then
+  echo "You lose against the AI. :("
+fi
+
+exit 0

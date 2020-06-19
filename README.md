@@ -20,7 +20,7 @@ In this repository I have many simple projects written in languages, libraries a
 | PHP                                                                   | [tinyblog](tinyblog)                                                     |
 | React                                                                 | tbd                                                                      |
 | SCSS ('Sass 3') (**\***)                                              | tbd                                                                      |
-| Shell scripting                                                       | tbd                                                                      |
+| Shell scripting                                                       | [shellgame](shellgame)                                                   |
 | SQL                                                                   | [tinyblog](tinyblog)                                                     |
 | TypeScript (**\***)                                                   | [\_tests](_tests)                                                        |
 | Vue (**\***)                                                          | tbd                                                                      |
